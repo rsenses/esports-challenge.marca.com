@@ -83,6 +83,15 @@
             #form.error .alert {
                 display: block;
             }
+            button > .loading {
+                display: none;
+            }
+            button.loading > .quiet {
+                display: none;
+            }
+            button.loading > .loading {
+                display: block;
+            }
             h2 {
                 text-align: center;
                 margin-bottom: 30px;
@@ -413,7 +422,15 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button type="submit" class="btn btn-success" id="sendButton" disabled>REGÍSTRATE</button>
+                                    <button type="submit" class="btn btn-success" id="sendButton" disabled>
+                                        <div class="quiet">
+                                            REGÍSTRATE
+                                        </div>
+                                        <div class="loading">
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            REGISTRANDO...
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -463,6 +480,7 @@
                 let formData = new FormData(form);
                 document.getElementById('form').className = '';
                 document.getElementById('claim').className = '';
+                document.getElementById('sendButton').classList.add('loading');
 
                 fetch(scriptURL, { method: 'POST', body: formData })
                     .then((response) => response.json())
@@ -471,9 +489,11 @@
                             document.getElementById('form').classList.add('hide');
                             document.getElementById('claim').classList.add('hide');
                             document.getElementById('thanks').classList.add('show');
+                            document.getElementById('sendButton').classList.remove('loading');
                             window.location.hash = 'thanks';
                         } else {
                             document.getElementById('form').classList.add('error');
+                            document.getElementById('sendButton').classList.remove('loading');
                         }
                     })
                     .catch((error) => document.getElementById('form').classList.add('error'));
