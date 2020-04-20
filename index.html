@@ -45,6 +45,13 @@
                 background: url(https://uecluster.blob.core.windows.net/images/esports/images/bg-header.jpg) no-repeat top center;
                 background-size: auto 100%;
             }
+            header .container {
+                position: relative;
+            }
+            header a {
+                display: none;
+            }
+
             main {
                 padding: 50px 0 80px;
             }
@@ -168,6 +175,38 @@
             .logo img {
                 max-width: 90px;
             }
+            @media (min-width: 960px) {
+                header a {
+                    position: absolute;
+                    bottom: 5.5rem;
+                    left: 50%;
+                    margin-left: -40px;
+                    display: block;
+                    margin: 0 auto;
+                    color: #fff;
+                    font-weight: 700;
+                }
+                header a:hover {
+                    color: #eee;
+                    text-decoration: none;
+                }
+                header a::before {
+                    animation: bounce 1s ease infinite;
+                    bottom: -4rem;
+                    color: #fff;
+                    content: '╲╱';
+                    font-size: 2rem;
+                    height: 4rem;
+                    left: 50%;
+                    letter-spacing: -1px;
+                    line-height: 4rem;
+                    margin-left: -3rem;
+                    opacity: 0.8;
+                    position: absolute;
+                    text-align: center;
+                    width: 6rem;
+                }
+            }
             @media (min-width: 576px) {
                 footer img {
                     max-width: 100%;
@@ -181,6 +220,16 @@
                     max-width: 100%;
                 }
             }
+
+            @keyframes bounce {
+                50% {
+                    transform: translateY(-20%);
+                }
+
+                100% {
+                    transform: translateY(0);
+                }
+            }
         </style>
         <script src="//e00-apps-ue.uecdn.es/tms/js/tms-marca.js"></script>
     </head>
@@ -188,6 +237,7 @@
         <header>
             <div class="container">
                 <img src="https://uecluster.blob.core.windows.net/images/esports/images/img-main.png" alt="Torneo On-line Fornite" class="img-fluid" />
+                <a href="#claim">Regístrate</a>
             </div>
         </header>
 
@@ -470,7 +520,9 @@
                 <a href="https://www.marca.com/esports.html" target="_blank" class="logo"><img src="https://uecluster.blob.core.windows.net/images/esports/images/logo.png" alt="eSPORTS Challenge" /></a>
             </div>
         </footer>
-        <script>TMSBottom();</script>
+        <script>
+            TMSBottom();
+        </script>
         <script>
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwTseKCP-ZJbHsj7GVh4Mf843dxsTt_qArb_euWPGt-f47Obb1A/exec';
             const form = document.forms['submit-to-google-sheet'];
