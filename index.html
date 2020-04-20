@@ -54,20 +54,25 @@
                 transition: visibility 0s, opacity 0.5s linear;
                 height: auto;
             }
-            section#thanks, section#thanks.hide, section.hide {
+            section#thanks,
+            section#thanks.hide,
+            section.hide {
                 visibility: hidden;
                 opacity: 0;
                 height: 0;
             }
-            section#thanks.show, section.show {
+            section#thanks.show,
+            section.show {
                 visibility: visible;
                 opacity: 1;
                 height: auto;
             }
-            #claim, #thanks {
+            #claim,
+            #thanks {
                 margin-bottom: 40px;
             }
-            #claim p, #thanks p {
+            #claim p,
+            #thanks p {
                 padding: 20px 0;
                 border-top: #a22825 4px solid;
                 border-bottom: #a22825 4px solid;
@@ -379,7 +384,7 @@
                                 <label for="gender" class="col-sm-5 col-form-label">Sexo</label>
                                 <div class="col-sm-5">
                                     <select class="custom-select" name="gender" id="gender" required>
-                                        <option selected disabled value=""></option>
+                                        <option selected disabled value="">Sexo</option>
                                         <option>Mujer</option>
                                         <option>Hombre</option>
                                     </select>
@@ -394,7 +399,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-5 d-none d-sm-block">
                                     <div class="form-check">
-                                        <label class="form-check-label" for="gridCheck1">
+                                        <label class="form-check-label" for="legal">
                                             <small>He leído y estoy de acuerdo con las condiciones del servicio y privacidad</small>
                                         </label>
                                     </div>
@@ -422,7 +427,7 @@
                 <div class="row">
                     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 text-center">
                         <h2>¡Gracias!</h2>
-                        <p class="text-center">TU REGISTRO SE HA COMPLETADO CON ÉXITO<br>AHORA YA PUEDES PARTICIPAR</p>
+                        <p class="text-center">TU REGISTRO SE HA COMPLETADO CON ÉXITO<br />AHORA YA PUEDES PARTICIPAR</p>
                         <a href="https://discord.gg/XPtJX2" class="btn btn-success" target="_blank" rel="nofollow noopener">COMIENZA AQUÍ</a>
                     </div>
                 </div>
@@ -435,44 +440,44 @@
                 <a href="https://www.marca.com/esports.html" target="_blank" class="logo"><img src="https://uecluster.blob.core.windows.net/images/esports/images/logo.png" alt="eSPORTS Challenge" /></a>
             </div>
         </footer>
-    </body>
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwTseKCP-ZJbHsj7GVh4Mf843dxsTt_qArb_euWPGt-f47Obb1A/exec';
-        const form = document.forms['submit-to-google-sheet'];
-        const button = document.getElementById('sendButton');
-        const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwTseKCP-ZJbHsj7GVh4Mf843dxsTt_qArb_euWPGt-f47Obb1A/exec';
+            const form = document.forms['submit-to-google-sheet'];
+            const button = document.getElementById('sendButton');
+            const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
-        function terms_changed(termsCheckBox) {
-            //If the checkbox has been checked
-            if (termsCheckBox.checked) {
-                //Set the disabled property to FALSE and enable the button.
-                document.getElementById('sendButton').disabled = false;
-            } else {
-                //Otherwise, disable the submit button.
-                document.getElementById('sendButton').disabled = true;
+            function terms_changed(termsCheckBox) {
+                //If the checkbox has been checked
+                if (termsCheckBox.checked) {
+                    //Set the disabled property to FALSE and enable the button.
+                    document.getElementById('sendButton').disabled = false;
+                } else {
+                    //Otherwise, disable the submit button.
+                    document.getElementById('sendButton').disabled = true;
+                }
             }
-        }
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            button.disabled = true;
-            let formData = new FormData(form);
-            document.getElementById('form').className = '';
-            document.getElementById('claim').className = '';
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                button.disabled = true;
+                let formData = new FormData(form);
+                document.getElementById('form').className = '';
+                document.getElementById('claim').className = '';
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.result === 'success') {
-                        document.getElementById('form').classList.add('hide')
-                        document.getElementById('claim').classList.add('hide')
-                        document.getElementById('thanks').classList.add('show')
-                        window.location.hash='thanks';
-                    } else {
-                        document.getElementById('form').classList.add('error')
-                    }
-                })
-                .catch((error) => document.getElementById('form').classList.add('error'));
-        });
-    </script>
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.result === 'success') {
+                            document.getElementById('form').classList.add('hide');
+                            document.getElementById('claim').classList.add('hide');
+                            document.getElementById('thanks').classList.add('show');
+                            window.location.hash = 'thanks';
+                        } else {
+                            document.getElementById('form').classList.add('error');
+                        }
+                    })
+                    .catch((error) => document.getElementById('form').classList.add('error'));
+            });
+        </script>
+    </body>
 </html>
