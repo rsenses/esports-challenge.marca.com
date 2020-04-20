@@ -54,15 +54,18 @@
                 transition: visibility 0s, opacity 0.5s linear;
                 height: auto;
             }
+            section#ie11,
             section#thanks,
             section#thanks.hide,
-            section.hide {
+            section.hide,
+            .ie11 section {
                 visibility: hidden;
                 opacity: 0;
                 height: 0;
             }
             section#thanks.show,
-            section.show {
+            section.show,
+            .ie11 section#ie11 {
                 visibility: visible;
                 opacity: 1;
                 height: auto;
@@ -72,7 +75,8 @@
                 margin-bottom: 40px;
             }
             #claim p,
-            #thanks p {
+            #thanks p,
+            #ie11 p {
                 padding: 20px 0;
                 border-top: #a22825 4px solid;
                 border-bottom: #a22825 4px solid;
@@ -179,7 +183,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="isIE11()">
         <header>
             <div class="container-fluid">
                 <img src="https://uecluster.blob.core.windows.net/images/esports/images/img-main.png" alt="Torneo On-line Fornite" class="img-fluid" />
@@ -187,6 +191,14 @@
         </header>
 
         <main class="container">
+            <section id="ie11">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                        <h2>Navegador no Soportado</h2>
+                        <p class="text-center">Por favor, utiliza un navegador más moderno, por ejemplo, Edge, Chrome o Firefox.</p>
+                    </div>
+                </div>
+            </section>
             <section id="claim">
                 <div class="row">
                     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -461,7 +473,6 @@
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwTseKCP-ZJbHsj7GVh4Mf843dxsTt_qArb_euWPGt-f47Obb1A/exec';
             const form = document.forms['submit-to-google-sheet'];
             const button = document.getElementById('sendButton');
-            const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
 
             function terms_changed(termsCheckBox) {
                 //If the checkbox has been checked
@@ -471,6 +482,14 @@
                 } else {
                     //Otherwise, disable the submit button.
                     document.getElementById('sendButton').disabled = true;
+                }
+            }
+
+            function isIE11() {
+                if (!!window.MSInputMethodContext && !!document.documentMode) {
+                    document.body.classList.add('ie11');
+                } else {
+                    document.body.classList.add('noie11');
                 }
             }
 
