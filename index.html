@@ -534,7 +534,7 @@
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" name="legal" id="legal" onclick="terms_changed()" required />
                                         <label class="form-check-label" for="legal">
-                                            <small>Al registrarte declaras aceptar las <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf" target="_blank">bases legales</a> del torneo, los <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf" target="_blank">términos y condiciones de uso</a>, así como la <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf" target="_blank">política de privacidad</a> y la <a href="http://cookies.unidadeditorial.es/" target="_blank" rel="nofollow noopener external">política de cookies.</a></small>
+                                            <small>Al registrarte declaras aceptar las <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf?v2" target="_blank">bases legales</a> del torneo, los <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf?v2" target="_blank">términos y condiciones de uso</a>, así como la <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf?v2" target="_blank">política de privacidad</a> y la <a href="http://cookies.unidadeditorial.es/" target="_blank" rel="nofollow noopener external">política de cookies.</a></small>
                                         </label>
                                     </div>
                                 </div>
@@ -607,7 +607,7 @@
             <div class="red-line big"></div>
             <div class="container">
                 <a href="https://www.interxion.es/" target="_blank" rel="noopener nofollow"><img src="https://uecluster.blob.core.windows.net/images/futmarca/interxion.png" alt="Interxion" /></a>
-                <!-- <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf" target="_blank" rel="noopener" class="legal">Bases legales</a> -->
+                <!-- <a href="https://uecluster.blob.core.windows.net/images/futmarca/bases-futmarca.pdf?v2" target="_blank" rel="noopener" class="legal">Bases legales</a> -->
                 <a href="https://www.marca.com/esports.html" target="_blank" class="logo"><img src="https://uecluster.blob.core.windows.net/images/futmarca/logo.png" alt="eSPORTS Challenge" /></a>
                 <a href="https://marca.com" class="float-right" target="_blank" rel="noopener"><img src="https://uecluster.blob.core.windows.net/images/futmarca/marca.png" alt="Marca" /></a>
             </div>
@@ -645,6 +645,7 @@
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
+                // enviosSC('submit-futmarca');
                 button.disabled = true;
                 let formData = new FormData(form);
                 document.getElementById('form').className = '';
@@ -655,17 +656,22 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.result === 'success') {
+                            // enviosSC('submit-futmarca-success');
                             document.getElementById('form').classList.add('hide');
                             document.getElementById('claim').classList.add('hide');
                             document.getElementById('thanks').classList.add('show');
                             document.getElementById('sendButton').classList.remove('loading');
                             window.location.hash = 'thanks';
                         } else {
+                            // enviosSC('submit-futmarca-error');
                             document.getElementById('form').classList.add('error');
                             document.getElementById('sendButton').classList.remove('loading');
                         }
                     })
-                    .catch((error) => document.getElementById('form').classList.add('error'));
+                    .catch((error) => {
+                        document.getElementById('form').classList.add('error');
+                        // enviosSC('submit-futmarca-error');
+                    });
             });
         </script>
     </body>
